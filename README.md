@@ -7,7 +7,7 @@ We were just about to start filming a prompter video at Bayer, and got annoyed, 
 I wrote this in about 10-20 minutes, so it's quite horrible, but it works. Uses jQuery.
 
 ### Features
--Line break support
--Single file
--Speed & font size controls
--In prompter controls (start/stop, reset, scroll up & down)
+*Line break support
+*Single file
+*Speed & font size controls
+*In prompter controls (start/stop, reset, scroll up & down)
