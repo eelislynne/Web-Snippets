@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prompter</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <style>
+    #main_text {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Verdana', sans-serif;">
+    <script>
+        var paused = false;
+        var topPos = 0;
+        var reset = false;
+        var mainText;
+        function start_prompter() {
+            var moveSpeed = $("#input_speed").val();
+            var fontSize = $("#input_size").val();
+
+            if (moveSpeed == "")
+                moveSpeed = 100;
+            else
+                moveSpeed = parseInt(moveSpeed);
+
+            if (fontSize == "")
+                fontSize = 51;
+            else
+                fontSize = parseInt(fontSize);
+
+            var inputText = $("#input_text").val();
+            $("#input_text").css("display","none");
+            $("#input_btn").css("display","none");
+            $("#input_speed").css("display","none");
+            $("#input_size").css("display","none");
+            $("#controls").css("display","block");
+            $("body").css("background-color", "#000");
+            
+            inputText = inputText.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+            mainText = $("#main_text");
+            mainText.html("<p>" + inputText + "</p>")
+            mainText.css("font-size",fontSize);
+            mainText.css("display","block");
+            
+            
+            setInterval(function() {
+                if (!paused) {
+                    topPos += moveSpeed / 100;
+                    setPos();
+                }
+                if (reset) {
+                    reset = false;
+                    topPos = 0;
+                    setPos();
+                }
+            }, 30);
+        }
+
+        function setPos() {
+            mainText.css("top", topPos * -1);
+        }
+        
+    </script>
+
+    <div style="margin-top: 50px; margin-left: 50px;">
+        <label>Input Text:</label><br>
+        <textarea id="input_text" cols="60" rows="10" style="margin-bottom: 20px;"></textarea><br>
+
+        <label>Speed:</label>
+        <input id="input_speed" placeholder="100" style="margin-bottom: 20px;"><br>
+
+        <label>Font Size:</label>
+        <input id="input_size" placeholder="51" style="margin-bottom: 20px;"><br>
+        
+        <button id="input_btn" onclick="start_prompter()">Start</button>
+    </div>
+    <div>
+        <div id="main_text" style="position: absolute; top: 0px;width: calc(100% - 300px); height: 100%; background-color: black; color: #fff; display:none; padding: 150px; margin: 0;">
+        </div>
+    </div>
+
+    <div id="controls" style="position:fixed; top: 0; left: 20%; background-color: #ccc; display: none;">
+        <button style="height: 50px; padding: 0 15px 0 15px" onclick="paused = !paused;">Start/Stop</button>
+        <button style="height: 50px; padding: 0 15px 0 15px" onclick="reset = true;">Reset</button>
+        <button style="height: 50px; padding: 0 15px 0 15px" onclick="topPos -= 100; setPos();">Up</button>
+        <button style="height: 50px; padding: 0 15px 0 15px" onclick="topPos += 100; setPos();">Down</button>
+    </div>
+</body>
+</html>
