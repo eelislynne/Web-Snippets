@@ -14,7 +14,7 @@ I wrote this in about 10-20 minutes, so it's quite horrible, but it works. Uses 
 
 
 ## Radio buttons for anything
-My friend was working on a project and wanted to have "radio buttons" that didn't look like shit. He told me that he didn't find any open source one alternative, so I decided to make one. This just uses some jQuery to do radio button like functionality. The radio group is done with a parent div. The current selection value is written to an input.
+My friend was working on a project and wanted to have "radio buttons" that didn't look like shit. He told me that he didn't find any open source alternative, so I decided to make one. This just uses some jQuery to do radio button like functionality. The radio group is done with a parent div. The current selection value is written to an input.
 
 ### Features
 * Radio buttons for any object (div, p, img, you name it)
