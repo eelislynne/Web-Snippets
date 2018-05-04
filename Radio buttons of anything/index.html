@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Radio button demo</title>
+
+    <!-- We need jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script>
+        // javascript for radio buttons, the radio buttons for with the parent objects
+
+        var selected = [];
+        function radioSelect(id) {
+
+            var element = $("#" + id);
+
+            // get parent
+            var parent = element.parent();
+
+            // invalid id
+            if (parent == undefined)
+                return;
+
+            var found = false;
+
+            for (var i = 0; i < selected.length; i++) {
+                var sel = selected[i];
+                if (sel.parent[0].id == parent[0].id) {
+                    sel.element.css("background-color", "#fff");
+
+                    var inputValue = element.attr('value');
+                    console.log(inputValue);
+                    $("#" + parent[0].id + "_input").attr("value", inputValue);
+
+                    // set background element color to #ccc
+                    sel.element = element;
+                    element.css("background-color", "#ccc");
+
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                element.css("background-color", "#ccc");
+                var inputValue = element.attr('value');
+                $("#" + parent[0].id + "_input").attr("value", inputValue);
+
+                selected.push({element: element, parent: parent});
+            }
+        }
+
+    </script>
+
+    <!-- You just have a parent div and inside it you have objects with an id, value and onclick-->
+    <div class="card-deck" id="radio_group_1">
+        <div id="radio_1" value="option_1" onclick="radioSelect('radio_1');">
+            <p>This is option 1</p>
+        </div>
+        <div id="radio_2" value="option_2" onclick="radioSelect('radio_2');">
+            <p>This is option 2</p>
+        </div>
+    </div>
+
+    <form action="stuff.php" method="get">
+        <!-- The id needs to be your parent div id + _input at the end, name is for php -->
+        <input type="hidden" id="radio_group_1_input" name="card_input">
+        <button type="submit" class="btn btn-blue-grey">Submit</button>
+    </form>
+    <script type="text/javascript">
+    // you can set a default selection by selecting the id of the default object
+    radioSelect('radio_1');
+    </script>
+</body>
+</html>
