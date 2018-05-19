@@ -21,3 +21,13 @@ My friend was working on a project and wanted to have "radio buttons" that didn'
 * Lightweight
 * jQuery (you decide if that's a positive or a negative)
 * Support for form inputs to be handled in your backend
+
+
+## Web Crawler
+A very basic web crawler to go through specific links on a site and search the pages of those links for specific texts.
+The crawler is super basic and will need to be adjusted for different scenarios, just thought to put it here as a concept. Execute this in console.
+
+### Features
+* Find specific links
+* Search filter pages
+* Console log output
